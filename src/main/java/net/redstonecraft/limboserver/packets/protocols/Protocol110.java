@@ -4,6 +4,7 @@ import net.redstonecraft.limboserver.NetworkManager;
 import net.redstonecraft.limboserver.PlayerConnection;
 import net.redstonecraft.limboserver.packets.Status;
 import net.redstonecraft.limboserver.packets.out.PacketPlayOutChunkData110;
+import net.redstonecraft.limboserver.packets.out.PacketPlayOutTabListHeaderFooter47;
 import net.redstonecraft.limboserver.packets.out.PacketPlayOutUpdateBlockEntity110;
 import net.redstonecraft.limboserver.world.Chunk;
 import net.redstonecraft.limboserver.world.SignTileEntity;
@@ -15,11 +16,13 @@ public class Protocol110 extends Protocol108 {
         registerPacketOut(Status.PLAY, 0x09, PacketPlayOutUpdateBlockEntity110.class);
         registerPacketOut(Status.PLAY, 0x20, PacketPlayOutChunkData110.class);
         registerPacketOut(Status.PLAY, 0x46, null);
+        registerPacketOut(Status.PLAY, 0x48, null);
+        registerPacketOut(Status.PLAY, 0x47, PacketPlayOutTabListHeaderFooter47.class);
     }
 
     @Override
     public int[] getVersions() {
-        return new int[]{110};
+        return new int[]{110, 210, 315, 316};
     }
 
     @Override
@@ -31,4 +34,5 @@ public class Protocol110 extends Protocol108 {
     public void sendChunk(PlayerConnection playerConnection, Chunk chunk) {
         networkManager.sendPacket(playerConnection, new PacketPlayOutChunkData110(chunk));
     }
+
 }

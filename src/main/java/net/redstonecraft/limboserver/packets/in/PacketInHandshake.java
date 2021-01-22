@@ -50,7 +50,7 @@ public class PacketInHandshake implements PacketIn {
         playerConnection.setProtocol(abstractProtocol);
         playerConnection.setProtocolId(version);
         playerConnection.setStatus(status);
-        String[] data = serverAddress.split("\00");
+        String[] data = serverAddress.split("\000");
         InetSocketAddress bungeeAddress = null;
         if (data.length == 3 || data.length == 4) {
             serverAddress = data[0];

@@ -16,7 +16,6 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -42,6 +41,9 @@ public class NetworkManager {
         protocols.add(new Protocol107(this));
         protocols.add(new Protocol108(this));
         protocols.add(new Protocol110(this));
+        protocols.add(new Protocol335(this));
+        protocols.add(new Protocol338(this));
+        protocols.add(new Protocol340(this));
     }
 
     public void bind(String ip, short port) throws IOException {
@@ -82,15 +84,15 @@ public class NetworkManager {
                     PlayerConnection playerConnection = new PlayerConnection(this, channel);
                     playerConnections.add(playerConnection);
                     channel.register(selector, channel.validOps(), null);
-                    System.out.println("------------------------");
-                    System.out.println(playerConnections.size());
-                    for (PlayerConnection i : playerConnections) {
-                        System.out.println(i.getInetAddress().getHostName() + ":" + i.getInetAddress().getPort() + " " + i.getUniqueId().toString() + " " + i.getName());
-                    }
-                    System.out.println("------------------------");
                 }
             } else if (key.isReadable()) {
                 readPacket((SocketChannel) key.channel());
+                System.out.println("------------------------");
+                System.out.println(playerConnections.size());
+                for (PlayerConnection i : playerConnections) {
+                    System.out.println(i.getInetAddress().getHostName() + ":" + i.getInetAddress().getPort() + " " + i.getUniqueId().toString() + " " + i.getName());
+                }
+                System.out.println("------------------------");
             }
         }
         selector.selectedKeys().clear();

@@ -4,16 +4,17 @@ import net.redstonecraft.limboserver.packets.PacketSerializer;
 
 import java.io.IOException;
 
-public class PacketOutDisconnect implements PacketOut {
+public class PacketPlayOutKeepAlive340 implements PacketOut {
 
-    private final String json;
+    private final int id;
 
-    public PacketOutDisconnect(String message) {
-        json = "{\"text\":\"" + message.replaceAll("\"", "\\\"") + "\"}";
+    public PacketPlayOutKeepAlive340(int id) {
+        this.id = id;
     }
 
     @Override
     public void write(PacketSerializer packetSerializer) throws IOException {
-        packetSerializer.writeString(json);
+        packetSerializer.writeLong(id);
     }
+
 }

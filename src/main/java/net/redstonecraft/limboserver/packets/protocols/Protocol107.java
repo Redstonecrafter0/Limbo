@@ -114,4 +114,3 @@ public class Protocol107 extends AbstractProtocol {
         networkManager.sendPacket(playerConnection, new PacketPlayOutUpdateSign(signTileEntity));
     }
 }
-

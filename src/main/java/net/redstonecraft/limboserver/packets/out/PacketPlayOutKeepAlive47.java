@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class PacketPlayOutKeepAlive47 implements PacketOut {
 
-    private int id;
+    private final int id;
 
     public PacketPlayOutKeepAlive47(int id) {
         this.id = id;
